@@ -56,7 +56,7 @@ fun convertCelsiusToFahrenheit() {
     // 5. จัดการ Null Safety ด้วย toDoubleOrNull() และ Elvis operator (?:)
     // ออกจากฟังก์ชัน convertCelsiusToFahrenheit() หากข้อมูลผิดพลาด: return
     // celsius
-    var celsius = readln().toDoubleOrNull()
+    val celsius = readln().toDoubleOrNull()
 
     val fahrenheitResult = celsiusToFahrenheit(celsius)
 
