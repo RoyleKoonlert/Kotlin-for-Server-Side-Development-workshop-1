@@ -35,9 +35,7 @@ fun main() {
     println("วิธีที่ 1: ใช้ Chaining กับ List")
     val totalElecPriceOver500 = products
         .filter { it.category == "Electronics" }
-        .filter { it.price > 500.0 }
-        .map { it.price}
-        .sum()
+        .filter { it.price > 500.0 }.sumOf { it.price }
     println("ผลรวมราคาสินค้า Electronics ที่ราคา > 500 บาท: $totalElecPriceOver500 บาท")
     println("--------------------------------------------------")
 
@@ -53,6 +51,26 @@ fun main() {
         .map { it.price}
         .sum()
         println("ผลรวมราคาสินค้า Electronics ที่ราคา > 500 บาท: $totalElecPriceOver500Sequence บาท")
+    println("--------------------------------------------------")
+
+    //แบ่งกลุ่มสินค้าตาม range ราคา ดังนี้
+    //- กลุ่มของสินค้าที่ราคาไม่เกิน 1,000 บาท
+    //- กลุ่มของสินค้าที่ราคาอยู่ระหว่าง 1,000 - 9,999 บาท
+    //- กลุ่มของสินค้าราคา 10,000 ขึ้นไป
+
+    println("แบ่งกลุ่มสินค้าตาม range ราคา ดังนี้")
+    val group1 = products
+        .groupBy { product: Product ->
+            when {
+                product.price <= 1000 -> "กลุ่มของสินค้าที่ราคาไม่เกิน 1,000 บาท "
+                product.price in 1000.0..9999.0 -> "กลุ่มของสินค้าที่ราคาอยู่ระหว่าง 1,000 - 9,999 บาท "
+                else -> "กลุ่มของสินค้าราคา 10,000 ขึ้นไป "
+            }
+        }
+    group1.forEach { (range, items) ->
+        println(range)
+        items.forEach { println("${it.name}: ${it.price}") }
+    }
     println("--------------------------------------------------")
 
 
