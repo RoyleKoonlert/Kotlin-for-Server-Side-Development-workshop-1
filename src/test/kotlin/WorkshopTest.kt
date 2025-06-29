@@ -1,5 +1,8 @@
 import org.example.celsiusToFahrenheit
 import org.example.kilometersToMiles
+import org.example.Product
+import org.example.calculateElectronicsPriceOver500
+import org.example.calculateTotalElectronicsPriceOver500
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
@@ -65,15 +68,39 @@ class WorkshopTest {
     // --- Tests for Workshop #1: Unit Converter End ---
 
     // --- Tests for Workshop #2: Data Analysis Pipeline ---
+    val products = listOf(
+        Product("Laptop", price = 35000.0, category = "Electronics"), Product("Smartphone", price = 25000.0, category = "Electronics"),
+        Product("T-shirt", price = 450.0, category = "Apparel"), Product("Monitor", price = 7500.0, category = "Electronics"),
+        Product("Keyboard", price = 499.0, category = "Electronics"), Product("Jeans", price = 1200.0, category = "Apparel"),
+        Product("Headphones", price = 1800.0, category = "Electronics")
+    )
+
+
     // ทำการแก้ไขไฟล์ Workshop2.kt ให้มีฟังก์ชันที่ต้องการทดสอบ
     // เช่น ฟังก์ชันที่คำนวณผลรวมราคาสินค้า Electronics ที่ราคา > 500 บาท
     // ในที่นี้จะสมมุติว่ามีฟังก์ชันชื่อ calculateTotalElectronicsPriceOver500 ที่รับ List<Product> และคืนค่า Double
     // จงเขียน test cases สำหรับฟังก์ชันนี้ โดยตรวจสอบผลรวมราคาสินค้า Electronics ที่ราคา > 500 บาท
     //
+    @Test
+    fun `test calculateTotalElectronicsPriceOver500`(){
+        val expected = 35000.0 +25000.0 +7500.0 +1800.0
 
+        val TotalElectronicsPriceOver500 = calculateTotalElectronicsPriceOver500(products)
 
+        assertEquals(expected, TotalElectronicsPriceOver500)
+
+    }
     // จงเขียน test cases เช็คจำนวนสินค้าที่อยู่ในหมวด 'Electronics' และมีราคามากกว่า 500 บาท
     // 🚨
+    @Test
+    fun `test calculateElectronicsPriceOver500`(){
+        val expected = 4
+
+        val ElectronicsPriceOver500 = calculateElectronicsPriceOver500(products)
+
+        assertEquals(expected, ElectronicsPriceOver500)
+
+    }
 
 
     // --- Tests for Workshop #2: Data Analysis Pipeline End ---
